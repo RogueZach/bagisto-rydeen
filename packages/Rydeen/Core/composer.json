@@ -1,0 +1,9 @@
+{
+    "name": "rydeen/core",
+    "description": "Rydeen Core - shared config, theme, and helpers",
+    "autoload": {
+        "psr-4": {
+            "Rydeen\\Core\\": "src/"
+        }
+    }
+}

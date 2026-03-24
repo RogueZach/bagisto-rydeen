@@ -85,4 +85,9 @@ return [
      * B2B Suite (must be after Shop).
      */
     B2BSuiteServiceProvider::class,
+
+    /**
+     * Rydeen custom packages.
+     */
+    \Rydeen\Core\Providers\CoreServiceProvider::class,
 ];

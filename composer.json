@@ -97,7 +97,11 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Rydeen\\Core\\": "packages/Rydeen/Core/src/",
+            "Rydeen\\Auth\\": "packages/Rydeen/Auth/src/",
+            "Rydeen\\Pricing\\": "packages/Rydeen/Pricing/src/",
+            "Rydeen\\Dealer\\": "packages/Rydeen/Dealer/src/"
         }
     },
     "autoload-dev": {
@@ -107,7 +111,11 @@
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
-            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests"
+            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
+            "Rydeen\\Core\\Tests\\": "packages/Rydeen/Core/tests/",
+            "Rydeen\\Auth\\Tests\\": "packages/Rydeen/Auth/tests/",
+            "Rydeen\\Pricing\\Tests\\": "packages/Rydeen/Pricing/tests/",
+            "Rydeen\\Dealer\\Tests\\": "packages/Rydeen/Dealer/tests/"
         }
     },
     "scripts": {
