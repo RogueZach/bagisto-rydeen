@@ -23,10 +23,7 @@ return new class extends Migration
                 ->on('rydeen_promotions')
                 ->cascadeOnDelete();
 
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('products')
-                ->cascadeOnDelete();
+            $table->index('product_id');
         });
     }
 

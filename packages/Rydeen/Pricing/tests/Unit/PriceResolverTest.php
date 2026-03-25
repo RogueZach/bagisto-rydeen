@@ -146,7 +146,7 @@ it('does not apply timing discount when after end date', function () {
 });
 
 it('applies sku level override price', function () {
-    $product = Product::factory()->simple()->create();
+    $productId = 9901;
 
     $promo = Promotion::create([
         'name'   => 'SKU Override',
@@ -158,12 +158,12 @@ it('applies sku level override price', function () {
 
     PromotionItem::create([
         'promotion_id'  => $promo->id,
-        'product_id'    => $product->id,
+        'product_id'    => $productId,
         'override_price' => 59.99,
     ]);
 
     $result = $this->resolver->resolve(
-        productId: $product->id,
+        productId: $productId,
         groupPrice: 100.00,
         customerGroupId: 1,
     );
@@ -173,8 +173,8 @@ it('applies sku level override price', function () {
 });
 
 it('does not apply sku level override for different product', function () {
-    $product = Product::factory()->simple()->create();
-    $otherProduct = Product::factory()->simple()->create();
+    $productId = 9902;
+    $otherProductId = 9903;
 
     $promo = Promotion::create([
         'name'   => 'SKU Override',
@@ -186,12 +186,12 @@ it('does not apply sku level override for different product', function () {
 
     PromotionItem::create([
         'promotion_id'  => $promo->id,
-        'product_id'    => $product->id,
+        'product_id'    => $productId,
         'override_price' => 59.99,
     ]);
 
     $result = $this->resolver->resolve(
-        productId: $otherProduct->id,
+        productId: $otherProductId,
         groupPrice: 100.00,
         customerGroupId: 1,
     );
