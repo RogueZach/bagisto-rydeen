@@ -48,5 +48,8 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->report(function (Throwable $e) {
+            // Ensure exceptions are visible in Railway/Octane logs
+            error_log('[APP_ERROR] ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+        });
     })->create();
