@@ -29,4 +29,5 @@ touch storage/installed
 php artisan optimize || echo "WARNING: optimize failed"
 
 echo "=== Starting server on port ${PORT:-8080} ==="
-exec PHP_CLI_SERVER_WORKERS=8 php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+export PHP_CLI_SERVER_WORKERS=8
+exec php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
