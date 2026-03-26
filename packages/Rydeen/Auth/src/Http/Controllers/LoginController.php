@@ -132,6 +132,10 @@ class LoginController extends Controller
      */
     public function register(Request $request)
     {
+        if (auth('customer')->check()) {
+            return redirect()->route('dealer.dashboard');
+        }
+
         $request->validate([
             'first_name'    => 'required|string|max:255',
             'last_name'     => 'required|string|max:255',
@@ -142,7 +146,7 @@ class LoginController extends Controller
 
         $customerGroup = CustomerGroup::where('code', 'new-dealers')->first();
 
-        Customer::create([
+        $customer = Customer::create([
             'first_name'        => $request->first_name,
             'last_name'         => $request->last_name,
             'email'             => $request->email,
@@ -153,6 +157,19 @@ class LoginController extends Controller
             'customer_group_id' => $customerGroup?->id,
             'channel_id'        => core()->getCurrentChannel()->id,
         ]);
+
+        // Store business_name in B2B Suite's custom attribute system
+        $businessAttr = \Illuminate\Support\Facades\DB::table('company_attributes')
+            ->where('code', 'business_name')
+            ->first();
+
+        if ($businessAttr && $customer) {
+            \Illuminate\Support\Facades\DB::table('customer_attribute_values')->insert([
+                'customer_id'          => $customer->id,
+                'company_attribute_id' => $businessAttr->id,
+                'text_value'           => $request->business_name,
+            ]);
+        }
 
         return redirect()->route('dealer.login')
             ->with('success', 'Your application has been submitted. You will receive an email once your account is approved.');

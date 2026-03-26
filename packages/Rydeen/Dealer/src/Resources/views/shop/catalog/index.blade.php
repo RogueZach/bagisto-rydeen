@@ -22,20 +22,20 @@
         </form>
     </div>
 
-    {{-- Category color map --}}
+    {{-- Category color map (using hex values for inline styles to avoid Tailwind purge issues) --}}
     @php
-        $categoryColors = [
-            'Digital Mirrors'       => 'blue-600',
-            'Blind Spot Detection'  => 'red-600',
-            'Cameras'               => 'green-600',
-            'Monitors'              => 'purple-600',
+        $categoryHex = [
+            'Digital Mirrors'       => '#2563eb',
+            'Blind Spot Detection'  => '#dc2626',
+            'Cameras'               => '#16a34a',
+            'Monitors'              => '#9333ea',
         ];
+        $defaultHex = '#6b7280';
 
-        // Build a map of category id => color for badge rendering
-        $categoryColorMap = [];
+        $categoryHexMap = [];
         if ($categories) {
             foreach ($categories as $cat) {
-                $categoryColorMap[$cat->id] = $categoryColors[$cat->name] ?? 'gray-500';
+                $categoryHexMap[$cat->id] = $categoryHex[$cat->name] ?? $defaultHex;
             }
         }
     @endphp
@@ -50,14 +50,14 @@
         @if ($categories)
             @foreach ($categories as $category)
                 @php
-                    $color = $categoryColors[$category->name] ?? 'gray-500';
+                    $hex = $categoryHex[$category->name] ?? $defaultHex;
                     $isActive = request('category') == $category->id;
                 @endphp
                 <a href="{{ route('dealer.catalog', array_merge(request()->only('search'), ['category' => $category->id])) }}"
-                   class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition
-                          {{ $isActive ? 'bg-' . $color . ' text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                   class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition {{ $isActive ? 'text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
+                   @if ($isActive) style="background-color: {{ $hex }}" @endif>
                     @if (! $isActive)
-                        <span class="w-2.5 h-2.5 rounded-full bg-{{ $color }} mr-2 flex-shrink-0"></span>
+                        <span class="w-2.5 h-2.5 rounded-full mr-2 flex-shrink-0" style="background-color: {{ $hex }}"></span>
                     @endif
                     {{ $category->name }}
                 </a>
@@ -76,14 +76,14 @@
                 @php
                     $productCategories = $product->categories;
                     $firstCategory = $productCategories->first();
-                    $catColor = $firstCategory ? ($categoryColorMap[$firstCategory->id] ?? 'gray-500') : 'gray-500';
+                    $catHex = $firstCategory ? ($categoryHexMap[$firstCategory->id] ?? $defaultHex) : $defaultHex;
                     $catName = $firstCategory?->name ?? 'Uncategorized';
                     $priceData = $prices[$product->id] ?? null;
                 @endphp
                 <div class="bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden flex flex-col">
                     {{-- Category Color Badge --}}
                     <div class="px-4 pt-3">
-                        <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold text-white bg-{{ $catColor }}">
+                        <span class="inline-block px-2 py-0.5 rounded text-xs font-semibold text-white" style="background-color: {{ $catHex }}">
                             {{ $catName }}
                         </span>
                     </div>
@@ -328,7 +328,7 @@
         const badge = document.getElementById('cart-badge');
         if (badge) {
             badge.textContent = totalQty;
-            badge.style.display = totalQty > 0 ? '' : 'none';
+            badge.style.display = totalQty > 0 ? 'flex' : 'none';
         }
     }
 

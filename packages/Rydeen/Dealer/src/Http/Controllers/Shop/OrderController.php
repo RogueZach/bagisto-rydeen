@@ -206,7 +206,7 @@ class OrderController extends Controller
 
         $item = $cart->items->firstWhere('id', $request->item_id);
         if ($item) {
-            Cart::update(['qty' => [$request->item_id => max(1, (int) $request->quantity)]]);
+            Cart::updateItems(['qty' => [$request->item_id => max(1, (int) $request->quantity)]]);
         }
 
         return redirect()->route('dealer.order-review');
