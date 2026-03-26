@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Rydeen\Auth\Http\Controllers\LoginController;
 
 Route::middleware('web')->prefix('dealer')->group(function () {
+    // Redirect bare /dealer to login
+    Route::get('/', fn () => redirect()->route('dealer.login'));
+
     Route::get('login', [LoginController::class, 'showLogin'])->name('dealer.login');
     Route::post('login', [LoginController::class, 'login'])->name('dealer.login.submit');
     Route::post('login/send-code', [LoginController::class, 'sendCode'])->name('dealer.login.send-code');

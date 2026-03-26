@@ -7,6 +7,9 @@ use Rydeen\Dealer\Http\Controllers\Admin\DealerContactController;
 use Rydeen\Dealer\Http\Controllers\Admin\ImpersonationController;
 use Rydeen\Dealer\Http\Controllers\Admin\OrderApprovalController;
 
+// Redirect bare /admin/rydeen to dealers index
+Route::middleware(['web', 'admin'])->get('admin/rydeen', fn () => redirect()->route('admin.rydeen.dealers.index'));
+
 Route::middleware(['web', 'admin'])->prefix('admin/rydeen/dealers')->group(function () {
     Route::get('/', [DealerApprovalController::class, 'index'])->name('admin.rydeen.dealers.index');
     Route::get('{id}', [DealerApprovalController::class, 'view'])->name('admin.rydeen.dealers.view');
