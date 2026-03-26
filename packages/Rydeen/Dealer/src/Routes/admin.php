@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Rydeen\Dealer\Http\Controllers\Admin\DealerApprovalController;
+use Rydeen\Dealer\Http\Controllers\Admin\SettingsController;
 use Rydeen\Dealer\Http\Controllers\Admin\DealerContactController;
 use Rydeen\Dealer\Http\Controllers\Admin\ImpersonationController;
 use Rydeen\Dealer\Http\Controllers\Admin\OrderApprovalController;
@@ -29,4 +30,9 @@ Route::middleware(['web', 'admin'])->prefix('admin/rydeen/contacts')->group(func
     Route::get('/', [DealerContactController::class, 'index'])->name('admin.rydeen.contacts.index');
     Route::get('{id}', [DealerContactController::class, 'view'])->name('admin.rydeen.contacts.view');
     Route::put('{id}', [DealerContactController::class, 'update'])->name('admin.rydeen.contacts.update');
+});
+
+Route::middleware(['web', 'admin'])->prefix('admin/rydeen/settings')->group(function () {
+    Route::get('/', [SettingsController::class, 'index'])->name('admin.rydeen.settings.index');
+    Route::put('/', [SettingsController::class, 'update'])->name('admin.rydeen.settings.update');
 });
