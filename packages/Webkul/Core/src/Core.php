@@ -144,14 +144,19 @@ class Core
             return $this->currentChannel;
         }
 
-        $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
-            $hostname,
-            'http://'.$hostname,
-            'https://'.$hostname,
-        ])->first();
+        try {
+            $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
+                $hostname,
+                'http://'.$hostname,
+                'https://'.$hostname,
+            ])->first();
 
-        if (! $this->currentChannel) {
-            $this->currentChannel = $this->channelRepository->first();
+            if (! $this->currentChannel) {
+                $this->currentChannel = $this->channelRepository->first();
+            }
+        } catch (\Exception $e) {
+            // Table may not exist during build/migration
+            return null;
         }
 
         return $this->currentChannel;
@@ -170,7 +175,7 @@ class Core
      */
     public function getCurrentChannelCode(): string
     {
-        return $this->getCurrentChannel()?->code;
+        return $this->getCurrentChannel()?->code ?? 'default';
     }
 
     /**
