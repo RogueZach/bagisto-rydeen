@@ -11,7 +11,7 @@
         <p style="color: #333; font-size: 16px; margin-bottom: 24px;">Your verification code is:</p>
 
         <div style="text-align: center; margin: 24px 0;">
-            <span style="display: inline-block; background: #f0f4ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 16px 32px; font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #1e40af; font-family: monospace;">{{ $code }}</span>
+            <span style="display: inline-block; background: #FFF9E0; border: 2px solid #FFD200; border-radius: 8px; padding: 16px 32px; font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #000000; font-family: monospace;">{{ $code }}</span>
         </div>
 
         <p style="color: #666; font-size: 14px; text-align: center; margin-top: 24px;">

@@ -41,7 +41,7 @@
         </p>
 
         @if ($order->notes)
-            <p style="color: #333; font-size: 14px; margin-top: 16px; padding: 12px; background: #f9fafb; border-left: 3px solid #3b82f6; border-radius: 4px;">
+            <p style="color: #333; font-size: 14px; margin-top: 16px; padding: 12px; background: #FFF9E0; border-left: 3px solid #FFD200; border-radius: 4px;">
                 <strong>Dealer Notes:</strong><br>{{ $order->notes }}
             </p>
         @endif

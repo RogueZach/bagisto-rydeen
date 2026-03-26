@@ -13,7 +13,7 @@
         <p style="color: #333; font-size: 16px;">Your dealer account has been approved. You now have full access to the Rydeen Dealer Portal where you can browse our catalog, place orders, and access dealer resources.</p>
 
         <div style="text-align: center; margin: 32px 0;">
-            <a href="{{ route('dealer.login') }}" style="display: inline-block; background: #2563eb; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: bold;">Log In to Your Account</a>
+            <a href="{{ route('dealer.login') }}" style="display: inline-block; background: #FFD200; color: #000000; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: bold;">Log In to Your Account</a>
         </div>
 
         <p style="color: #666; font-size: 14px; margin-top: 24px;">
