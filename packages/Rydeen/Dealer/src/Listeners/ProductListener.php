@@ -94,9 +94,16 @@ class ProductListener
     {
         $candidate = $slug;
         $suffix = 0;
+        $maxAttempts = 100;
 
         while ($this->slugExists($candidate, $productId, $urlKeyAttributeId)) {
             $suffix++;
+
+            if ($suffix > $maxAttempts) {
+                $candidate = $slug . '-' . uniqid();
+                break;
+            }
+
             $candidate = $slug . '-' . $suffix;
         }
 
