@@ -13,6 +13,12 @@ class DealerServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../Config/paymentmethods.php', 'payment_methods');
         $this->mergeConfigFrom(__DIR__ . '/../Config/carriers.php', 'carriers');
+
+        // Fix B2B Suite bug: CustomerController::index() missing $channels
+        $this->app->bind(
+            \Webkul\Admin\Http\Controllers\Customers\CustomerController::class,
+            \Rydeen\Dealer\Http\Controllers\Admin\CustomerController::class
+        );
     }
 
     /**
