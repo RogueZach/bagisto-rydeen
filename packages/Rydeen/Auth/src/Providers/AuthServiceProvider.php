@@ -25,5 +25,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('device.verify', \Rydeen\Auth\Http\Middleware\DeviceVerification::class);
         $router->aliasMiddleware('redirect.standard.auth', \Rydeen\Auth\Http\Middleware\RedirectStandardAuth::class);
+        $router->pushMiddlewareToGroup('web', \Rydeen\Auth\Http\Middleware\RedirectStandardAuth::class);
     }
 }
