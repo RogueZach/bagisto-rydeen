@@ -109,7 +109,7 @@ it('appends suffix when slug already exists for another product', function () {
 });
 
 it('handles unicode characters and diacriticals in names', function () {
-    $this->product = createTestProduct('TEST-005', 'Camara Retrovisora Electonica');
+    $this->product = createTestProduct('TEST-005', 'Cámara Retrovisora Electrónica');
 
     $this->listener->afterSave($this->product);
 
@@ -118,7 +118,7 @@ it('handles unicode characters and diacriticals in names', function () {
         ->where('attribute_id', $this->urlKeyAttributeId)
         ->value('text_value');
 
-    expect($urlKey)->toBe('test-005-camara-retrovisora-electonica');
+    expect($urlKey)->toBe('test-005-camara-retrovisora-electronica');
 });
 
 /**
