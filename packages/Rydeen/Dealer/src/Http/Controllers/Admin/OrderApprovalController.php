@@ -67,7 +67,8 @@ class OrderApprovalController extends Controller
                 'customers.first_name',
                 'customers.last_name',
                 'customers.email',
-                'customers.phone'
+                'customers.phone',
+                'orders.dealer_contact_id'
             )
             ->where('orders.id', $id)
             ->first();
@@ -82,9 +83,8 @@ class OrderApprovalController extends Controller
             ->get();
 
         $contact = null;
-        $contactId = DB::table('orders')->where('id', $id)->value('dealer_contact_id');
-        if ($contactId) {
-            $contact = DB::table('rydeen_dealer_contacts')->where('id', $contactId)->first();
+        if ($order->dealer_contact_id) {
+            $contact = DB::table('rydeen_dealer_contacts')->where('id', $order->dealer_contact_id)->first();
         }
 
         return view('rydeen-dealer::admin.orders.view', compact('order', 'items', 'contact'));

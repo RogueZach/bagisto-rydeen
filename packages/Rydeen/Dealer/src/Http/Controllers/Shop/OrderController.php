@@ -57,7 +57,11 @@ class OrderController extends Controller
             abort(404);
         }
 
-        return view('rydeen-dealer::shop.orders.view', compact('order'));
+        $contact = $order->dealer_contact_id
+            ? DealerContact::find($order->dealer_contact_id)
+            : null;
+
+        return view('rydeen-dealer::shop.orders.view', compact('order', 'contact'));
     }
 
     /**

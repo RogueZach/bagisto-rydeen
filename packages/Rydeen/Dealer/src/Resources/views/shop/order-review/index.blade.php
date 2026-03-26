@@ -278,7 +278,9 @@ function contactWidget() {
             }
             this.searching = true;
             try {
-                const res = await fetch(`{{ route('dealer.contacts.search') }}?q=${encodeURIComponent(this.searchQuery)}`);
+                const res = await fetch(`{{ route('dealer.contacts.search') }}?q=${encodeURIComponent(this.searchQuery)}`, {
+                    headers: { 'Accept': 'application/json' },
+                });
                 this.results = await res.json();
             } catch (e) {
                 this.results = [];

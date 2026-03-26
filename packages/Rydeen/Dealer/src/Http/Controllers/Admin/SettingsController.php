@@ -35,16 +35,27 @@ class SettingsController extends Controller
         $adminIds = $validated['admin_ids'] ?? [];
         $value = json_encode(array_map('intval', $adminIds));
 
-        DB::table('core_config')->updateOrInsert(
-            ['code' => 'rydeen.order_notification_admin_ids'],
-            [
-                'value'      => $value,
+        $exists = DB::table('core_config')
+            ->where('code', 'rydeen.order_notification_admin_ids')
+            ->exists();
+
+        if ($exists) {
+            DB::table('core_config')
+                ->where('code', 'rydeen.order_notification_admin_ids')
+                ->update([
+                    'value'      => $value,
+                    'updated_at' => now(),
+                ]);
+        } else {
+            DB::table('core_config')->insert([
+                'code'         => 'rydeen.order_notification_admin_ids',
+                'value'        => $value,
                 'channel_code' => 'default',
                 'locale_code'  => 'en',
-                'updated_at' => now(),
-                'created_at' => now(),
-            ]
-        );
+                'created_at'   => now(),
+                'updated_at'   => now(),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Notification settings saved.');
     }
