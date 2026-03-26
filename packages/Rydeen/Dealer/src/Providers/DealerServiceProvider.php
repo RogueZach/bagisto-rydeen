@@ -2,6 +2,7 @@
 
 namespace Rydeen\Dealer\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class DealerServiceProvider extends ServiceProvider
@@ -39,5 +40,20 @@ class DealerServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
+
+        // Fix B2B Suite bug: customer create partial needs $channels and $groups
+        // but not all controllers that include it pass these variables.
+        View::composer('admin::customers.customers.index.create', function ($view) {
+            $data = $view->getData();
+
+            if (! isset($data['channels'])) {
+                $view->with('channels', core()->getAllChannels());
+            }
+
+            if (! isset($data['groups'])) {
+                $view->with('groups', app(\Webkul\Customer\Repositories\CustomerGroupRepository::class)
+                    ->findWhere([['code', '<>', 'guest']]));
+            }
+        });
     }
 }
