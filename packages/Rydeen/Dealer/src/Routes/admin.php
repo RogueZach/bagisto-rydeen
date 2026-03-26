@@ -10,6 +10,15 @@ use Rydeen\Dealer\Http\Controllers\Admin\OrderApprovalController;
 // Redirect bare /admin/rydeen to dealers index
 Route::middleware(['web', 'admin'])->get('admin/rydeen', fn () => redirect()->route('admin.rydeen.dealers.index'));
 
+// Common singular → plural redirects
+Route::middleware(['web', 'admin'])->group(function () {
+    Route::redirect('admin/rydeen/dealer', 'admin/rydeen/dealers', 301);
+    Route::redirect('admin/rydeen/order', 'admin/rydeen/orders', 301);
+    Route::redirect('admin/rydeen/contact', 'admin/rydeen/contacts', 301);
+    Route::redirect('admin/rydeen/setting', 'admin/rydeen/settings', 301);
+    Route::redirect('admin/rydeen/promotion', 'admin/rydeen/promotions', 301);
+});
+
 Route::middleware(['web', 'admin'])->prefix('admin/rydeen/dealers')->group(function () {
     Route::get('/', [DealerApprovalController::class, 'index'])->name('admin.rydeen.dealers.index');
     Route::get('{id}', [DealerApprovalController::class, 'view'])->name('admin.rydeen.dealers.view');
