@@ -35,9 +35,21 @@ return [
         'dealer-rejected'  => 'Dealer has been suspended.',
         'rep-assigned'     => 'Sales rep has been assigned.',
         'forecast-updated' => 'Forecast level has been updated.',
+
+        'orders' => [
+            'title'          => 'Dealer Orders',
+            'no-orders'      => 'No orders found.',
+            'order-approved' => 'Order has been approved and is now processing.',
+            'order-held'     => 'Order has been put on hold.',
+            'order-canceled' => 'Order has been canceled.',
+        ],
     ],
 
     'shop' => [
+        'auth' => [
+            'registration-pending' => 'Your application has been submitted. You will receive an email once your account is approved.',
+        ],
+
         'dashboard' => [
             'title'            => 'Dashboard',
             'welcome'          => 'Welcome, :name',
@@ -49,6 +61,10 @@ return [
             'browse-catalog'   => 'Browse Catalog',
             'view-orders'      => 'View Orders',
             'resources'        => 'Resources & FAQ',
+            'recent-orders'    => 'Recent Orders',
+            'view-all'         => 'View all',
+            'no-recent-orders' => 'No orders yet',
+            'start-browsing'   => 'Start by browsing our product catalog.',
         ],
 
         'catalog' => [
@@ -99,10 +115,18 @@ return [
 
             'order-placed'         => 'Order Placed Successfully!',
             'confirmation-title'   => 'Order Confirmation',
-            'confirmation-message' => 'Your order #:id has been placed and is being processed.',
+            'confirmation-message' => 'Your order #:id has been submitted for review.',
 
             'reorder-success'      => ':count item(s) added to your cart.',
             'reorder-failed'       => 'Could not add items to your cart.',
+
+            'back-to-catalog'          => 'Back to Catalog',
+            'order-items'              => 'Order Items',
+            'order-summary'            => 'Order Summary',
+            'admin-review-required'    => 'Orders require admin review before processing.',
+            'processing-hours-title'   => 'Order Processing Hours',
+            'processing-hours'         => 'Mon-Fri, 9:30 AM - 4:30 PM PT. Orders received after hours or on weekends will be processed the next business day.',
+            'notes-read-by'            => 'Notes will be read by a Rydeen Specialist.',
         ],
 
         'resources' => [
