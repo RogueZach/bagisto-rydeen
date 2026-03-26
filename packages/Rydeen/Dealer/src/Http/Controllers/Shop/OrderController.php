@@ -195,6 +195,33 @@ class OrderController extends Controller
     }
 
     /**
+     * Update a cart item quantity.
+     */
+    public function updateItem(Request $request)
+    {
+        $cart = Cart::getCart();
+        if (! $cart) {
+            return redirect()->route('dealer.order-review');
+        }
+
+        $item = $cart->items->firstWhere('id', $request->item_id);
+        if ($item) {
+            Cart::update(['qty' => [$request->item_id => max(1, (int) $request->quantity)]]);
+        }
+
+        return redirect()->route('dealer.order-review');
+    }
+
+    /**
+     * Remove an item from the cart.
+     */
+    public function removeItem(Request $request)
+    {
+        Cart::removeItem($request->item_id);
+        return redirect()->route('dealer.order-review');
+    }
+
+    /**
      * Ensure the cart has billing (and shipping) addresses populated from the customer.
      */
     protected function ensureCartAddresses($cart, $customer): void

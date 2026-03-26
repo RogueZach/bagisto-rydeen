@@ -25,6 +25,8 @@ Route::middleware(['web', 'customer'])->prefix('dealer')->group(function () {
 
     // Order Review & Place
     Route::get('order-review', [OrderController::class, 'review'])->name('dealer.order-review');
+    Route::post('order-review/update-item', [OrderController::class, 'updateItem'])->name('dealer.order-review.update-item');
+    Route::post('order-review/remove-item', [OrderController::class, 'removeItem'])->name('dealer.order-review.remove-item');
     Route::post('order-review/place', [OrderController::class, 'placeOrder'])->name('dealer.order-review.place');
 
     // Cart (redirect to order review)
