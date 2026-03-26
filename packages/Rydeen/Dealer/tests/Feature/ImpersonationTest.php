@@ -73,6 +73,74 @@ it('admin can stop impersonating and return to admin', function () {
     DB::table('customers')->where('id', $customerId)->delete();
 });
 
+it('shows impersonation banner when impersonating', function () {
+    $admin = getTestAdmin();
+    $customerId = createVerifiedCompany();
+    $customer = Customer::find($customerId);
+
+    $response = $this->actingAs($customer, 'customer')
+        ->withSession([
+            'impersonating_admin_id'  => $admin->id,
+            'impersonating_dealer_id' => $customerId,
+        ])
+        ->get(route('dealer.dashboard'));
+
+    $response->assertStatus(200);
+    $response->assertSee('You are viewing as');
+    $response->assertSee('Return to Admin');
+    $response->assertSee($customer->first_name);
+
+    // Cleanup
+    DB::table('customers')->where('id', $customerId)->delete();
+});
+
+it('does not show impersonation banner for normal dealers', function () {
+    $customerId = createVerifiedCompany();
+    $customer = Customer::find($customerId);
+
+    $authService = app(\Rydeen\Auth\Services\AuthService::class);
+    $uuid = $authService->createDeviceTrust($customer);
+
+    $response = $this->actingAs($customer, 'customer')
+        ->withCookie('rydeen_device', $uuid)
+        ->get(route('dealer.dashboard'));
+
+    $response->assertStatus(200);
+    $response->assertDontSee('You are viewing as');
+
+    // Cleanup
+    DB::table('rydeen_trusted_devices')->where('customer_id', $customerId)->delete();
+    DB::table('customers')->where('id', $customerId)->delete();
+});
+
+it('admin dealer view shows impersonate button for verified dealers', function () {
+    $admin = getTestAdmin();
+    $customerId = createVerifiedCompany();
+
+    $response = $this->actingAs($admin, 'admin')
+        ->get(route('admin.rydeen.dealers.view', $customerId));
+
+    $response->assertStatus(200);
+    $response->assertSee('Login as Dealer');
+
+    // Cleanup
+    DB::table('customers')->where('id', $customerId)->delete();
+});
+
+it('admin dealer view hides impersonate button for unverified dealers', function () {
+    $admin = getTestAdmin();
+    $customerId = createPendingDealer();
+
+    $response = $this->actingAs($admin, 'admin')
+        ->get(route('admin.rydeen.dealers.view', $customerId));
+
+    $response->assertStatus(200);
+    $response->assertDontSee('Login as Dealer');
+
+    // Cleanup
+    DB::table('customers')->where('id', $customerId)->delete();
+});
+
 if (! function_exists('createVerifiedCompany')) {
     function createVerifiedCompany(): int
     {

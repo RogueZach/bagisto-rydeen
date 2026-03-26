@@ -111,6 +111,15 @@
                         </button>
                     </form>
                 @endif
+
+                @if ($dealer->is_verified && ! $dealer->is_suspended)
+                    <form action="{{ route('admin.rydeen.dealers.impersonate', $dealer->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600 text-sm">
+                            @lang('rydeen-dealer::app.admin.impersonate')
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
 
