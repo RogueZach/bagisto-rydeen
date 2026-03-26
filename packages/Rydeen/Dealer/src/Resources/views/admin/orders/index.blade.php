@@ -70,7 +70,7 @@
                                     </span>
                                     @break
                                 @case('processing')
-                                    <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-blue-100 text-blue-800">
+                                    <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-yellow-100 text-yellow-800">
                                         Processing
                                     </span>
                                     @break
@@ -92,7 +92,7 @@
                         </td>
                         <td class="px-4 py-3">
                             <a href="{{ route('admin.rydeen.orders.view', $order->id) }}"
-                               class="text-blue-600 hover:text-blue-800 dark:text-blue-400">
+                               class="text-gray-900 hover:text-gray-700 dark:text-yellow-400">
                                 View
                             </a>
                         </td>

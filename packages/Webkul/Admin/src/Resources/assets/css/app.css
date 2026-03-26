@@ -12,7 +12,7 @@
 
 @layer components {
     ::selection {
-        background-color: rgba(0, 68, 242, .2);
+        background-color: rgba(255, 209, 0, .3);
     }
 
     body {
@@ -37,7 +37,7 @@
 
     .draggable-ghost {
         opacity: 0.5;
-        background: #e0e7ff;
+        background: #FEF9C3;
     }
 
     [class^="icon-"],
@@ -398,11 +398,11 @@
     }
 
     .primary-button {
-        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
+        @apply bg-gray-900 border border-black cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
     }
 
     .secondary-button {
-        @apply flex cursor-pointer place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-blue-600 bg-white px-3 py-1.5 font-semibold text-blue-600 transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
+        @apply flex cursor-pointer place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-gray-900 bg-white px-3 py-1.5 font-semibold text-gray-900 transition-all hover:bg-gray-50 focus:bg-gray-50 dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
     }
 
     .transparent-button {
@@ -545,12 +545,12 @@
 
 .tox .tox-toolbar__group:last-child button {
     padding: 6px 8px;
-    background: #eff6ff;
-    color: #2563EB;
+    background: #FEF9C3;
+    color: #1a1a1a;
 }
 
 .tox .tox-toolbar__group:last-child button:hover {
-    background: #dbeafe;
+    background: #FEF08A;
 }
 
 

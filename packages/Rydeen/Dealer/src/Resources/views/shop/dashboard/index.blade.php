@@ -57,7 +57,7 @@
     <div class="mt-8 bg-white rounded-lg shadow">
         <div class="flex items-center justify-between px-6 py-4 border-b">
             <h2 class="text-lg font-semibold text-gray-900">Recent Orders</h2>
-            <a href="{{ route('dealer.orders') }}" class="text-sm text-blue-600 hover:text-blue-800">View all &rarr;</a>
+            <a href="{{ route('dealer.orders') }}" class="text-sm text-gray-900 hover:text-gray-700">View all &rarr;</a>
         </div>
 
         @if ($recentOrders->isEmpty())
@@ -68,7 +68,7 @@
                 <p class="text-gray-500 font-medium mb-1">No orders yet</p>
                 <p class="text-sm text-gray-400 mb-4">Start by browsing our product catalog.</p>
                 <a href="{{ route('dealer.catalog') }}"
-                   class="inline-block bg-blue-600 text-white px-5 py-2 rounded text-sm hover:bg-blue-700">
+                   class="inline-block bg-gray-900 text-white px-5 py-2 rounded text-sm hover:bg-black">
                     Browse Catalog
                 </a>
             </div>
@@ -88,7 +88,7 @@
                         @foreach ($recentOrders as $order)
                             <tr class="border-b last:border-b-0 hover:bg-gray-50">
                                 <td class="px-6 py-3">
-                                    <a href="{{ route('dealer.orders.view', $order->id) }}" class="text-blue-600 hover:text-blue-800 font-medium">
+                                    <a href="{{ route('dealer.orders.view', $order->id) }}" class="text-gray-900 hover:text-gray-700 font-medium">
                                         #{{ $order->increment_id ?? $order->id }}
                                     </a>
                                 </td>

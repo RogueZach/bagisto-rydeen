@@ -5,7 +5,7 @@
 @section('content')
     <div class="mb-4 flex items-center justify-between">
         <div>
-            <a href="{{ route('dealer.orders') }}" class="text-sm text-blue-600 hover:text-blue-800">
+            <a href="{{ route('dealer.orders') }}" class="text-sm text-gray-900 hover:text-gray-700">
                 &larr; @lang('rydeen-dealer::app.shop.orders.back-to-orders')
             </a>
             <h1 class="text-2xl font-bold text-gray-900 mt-2">
@@ -19,7 +19,7 @@
             </a>
             <form action="{{ route('dealer.orders.reorder', $order->id) }}" method="POST" class="inline">
                 @csrf
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">
+                <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded text-sm hover:bg-black">
                     @lang('rydeen-dealer::app.shop.orders.reorder')
                 </button>
             </form>

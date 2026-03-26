@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mb-4">
-        <a href="{{ route('dealer.catalog') }}" class="text-sm text-blue-600 hover:text-blue-800">
+        <a href="{{ route('dealer.catalog') }}" class="text-sm text-gray-900 hover:text-gray-700">
             &larr; @lang('rydeen-dealer::app.shop.catalog.back-to-catalog')
         </a>
     </div>
@@ -34,7 +34,7 @@
                         <template x-for="(img, index) in images" :key="index">
                             <button @click="activeImage = img"
                                     class="flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden"
-                                    :class="activeImage === img ? 'border-blue-600' : 'border-gray-200 hover:border-gray-400'">
+                                    :class="activeImage === img ? 'border-yellow-500' : 'border-gray-200 hover:border-gray-400'">
                                 <img :src="img" :alt="'{{ $product->name }} image ' + (index + 1)" class="w-full h-full object-contain bg-gray-50">
                             </button>
                         </template>
@@ -113,7 +113,7 @@
 
     {{-- Back to Browse --}}
     <div class="mt-6">
-        <a href="{{ route('dealer.catalog') }}" class="text-sm text-blue-600 hover:text-blue-800">
+        <a href="{{ route('dealer.catalog') }}" class="text-sm text-gray-900 hover:text-gray-700">
             &larr; Back to Browse
         </a>
     </div>

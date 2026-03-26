@@ -16,7 +16,7 @@ img.lazy {
 
 @layer components {
     ::selection {
-        background-color: rgba(6, 12, 59, .2);
+        background-color: rgba(255, 209, 0, .3);
     }
 
     input {
@@ -493,7 +493,7 @@ img.lazy {
     .glow-404 {
         background-clip: text;
         -webkit-background-clip: text;
-        color: #060C3B;
+        color: #1A1A1A;
     }
 
     .glow-shadow-404 {

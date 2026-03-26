@@ -35,7 +35,7 @@
                             <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-yellow-100 text-yellow-800">Pending</span>
                             @break
                         @case('processing')
-                            <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-blue-100 text-blue-800">Processing</span>
+                            <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-yellow-100 text-yellow-800">Processing</span>
                             @break
                         @case('completed')
                             <span class="inline-flex px-2 py-0.5 text-xs font-medium rounded bg-green-100 text-green-800">Completed</span>

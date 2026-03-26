@@ -38,7 +38,7 @@
                     value="{{ old('email') }}"
                     required
                     autofocus
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                     placeholder="dealer@example.com"
                 >
             </div>
@@ -52,7 +52,7 @@
                     id="password"
                     name="password"
                     required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                 >
             </div>
 
@@ -65,7 +65,7 @@
         </form>
 
         <p class="mt-4 text-center text-sm text-gray-600">
-            Not a dealer yet? <a href="{{ route('dealer.register') }}" class="text-blue-600 hover:text-blue-800 font-medium">Apply for an account</a>
+            Not a dealer yet? <a href="{{ route('dealer.register') }}" class="text-gray-900 hover:text-gray-700 font-medium">Apply for an account</a>
         </p>
     </div>
 </div>

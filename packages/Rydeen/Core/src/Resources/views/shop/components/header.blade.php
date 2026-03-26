@@ -9,19 +9,19 @@
             <nav class="hidden md:flex items-center space-x-6">
                 @auth('customer')
                     <a href="/dealer/dashboard"
-                       class="text-sm font-medium {{ request()->is('dealer/dashboard*') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
+                       class="text-sm font-medium {{ request()->is('dealer/dashboard*') ? 'text-gray-900 border-b-2 border-yellow-400 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
                         Dashboard
                     </a>
                     <a href="/dealer/catalog"
-                       class="text-sm font-medium {{ request()->is('dealer/catalog*') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
+                       class="text-sm font-medium {{ request()->is('dealer/catalog*') ? 'text-gray-900 border-b-2 border-yellow-400 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
                         Catalog
                     </a>
                     <a href="/dealer/orders"
-                       class="text-sm font-medium {{ request()->is('dealer/orders*') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
+                       class="text-sm font-medium {{ request()->is('dealer/orders*') ? 'text-gray-900 border-b-2 border-yellow-400 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
                         Orders
                     </a>
                     <a href="/dealer/resources"
-                       class="text-sm font-medium {{ request()->is('dealer/resources*') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
+                       class="text-sm font-medium {{ request()->is('dealer/resources*') ? 'text-gray-900 border-b-2 border-yellow-400 pb-1' : 'text-gray-600 hover:text-gray-900' }}">
                         Resources
                     </a>
 
@@ -68,19 +68,19 @@
         <div class="px-4 py-3 space-y-2">
             @auth('customer')
                 <a href="/dealer/dashboard"
-                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/dashboard*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/dashboard*') ? 'bg-yellow-50 text-gray-900' : 'text-gray-600 hover:bg-gray-100' }}">
                     Dashboard
                 </a>
                 <a href="/dealer/catalog"
-                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/catalog*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/catalog*') ? 'bg-yellow-50 text-gray-900' : 'text-gray-600 hover:bg-gray-100' }}">
                     Catalog
                 </a>
                 <a href="/dealer/orders"
-                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/orders*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/orders*') ? 'bg-yellow-50 text-gray-900' : 'text-gray-600 hover:bg-gray-100' }}">
                     Orders
                 </a>
                 <a href="/dealer/resources"
-                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/resources*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}">
+                   class="block px-3 py-2 rounded text-sm font-medium {{ request()->is('dealer/resources*') ? 'bg-yellow-50 text-gray-900' : 'text-gray-600 hover:bg-gray-100' }}">
                     Resources
                 </a>
                 <a href="{{ route('dealer.cart') }}"

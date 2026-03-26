@@ -12,7 +12,7 @@
                    value="{{ request('search') }}"
                    placeholder="{{ trans('rydeen-dealer::app.shop.orders.search-placeholder') }}"
                    class="border border-gray-300 rounded px-3 py-2 text-sm w-64">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">
+            <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded text-sm hover:bg-black">
                 @lang('rydeen-dealer::app.shop.catalog.search')
             </button>
         </form>
@@ -56,7 +56,7 @@
                         <td class="px-4 py-3">
                             <div class="flex gap-2">
                                 <a href="{{ route('dealer.orders.view', $order->id) }}"
-                                   class="text-blue-600 hover:text-blue-800 text-xs">
+                                   class="text-gray-900 hover:text-gray-700 text-xs">
                                     @lang('rydeen-dealer::app.shop.orders.view')
                                 </a>
                                 <a href="{{ route('dealer.orders.print', $order->id) }}"

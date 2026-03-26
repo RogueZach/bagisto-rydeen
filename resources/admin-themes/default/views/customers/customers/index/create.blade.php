@@ -45,7 +45,7 @@
                                         <span
                                             v-for="company in selectedCompanies"
                                             :key="company.id"
-                                            class="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                                            class="inline-flex items-center rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
                                         >
                                             @{{ company.name }}
                                             

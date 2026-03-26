@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/Resources/**/*.blade.php", "./src/Resources/**/*.js"],
+    content: [
+        "./src/Resources/**/*.blade.php",
+        "./src/Resources/**/*.js",
+        "../../../packages/Rydeen/*/src/Resources/views/**/*.blade.php",
+    ],
 
     theme: {
         container: {
@@ -29,11 +33,12 @@ module.exports = {
 
         extend: {
             colors: {
-                navyBlue: "#060C3B",
+                navyBlue: "#1A1A1A",
                 lightOrange: "#F6F2EB",
                 darkGreen: '#40994A',
                 darkBlue: '#0044F2',
                 darkPink: '#F85156',
+                rydeen: '#FFD100',
             },
 
             fontFamily: {

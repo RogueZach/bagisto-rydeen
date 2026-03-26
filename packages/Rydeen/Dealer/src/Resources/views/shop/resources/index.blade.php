@@ -12,7 +12,7 @@
                    value="{{ request('search') }}"
                    placeholder="{{ trans('rydeen-dealer::app.shop.resources.search-placeholder') }}"
                    class="border border-gray-300 rounded px-3 py-2 text-sm w-64">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">
+            <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded text-sm hover:bg-black">
                 @lang('rydeen-dealer::app.shop.catalog.search')
             </button>
         </form>
@@ -55,7 +55,7 @@
                                     @if ($item->file_path)
                                         <div class="mt-3">
                                             <a href="{{ asset('storage/' . $item->file_path) }}"
-                                               class="inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
+                                               class="inline-flex items-center text-sm text-gray-900 hover:text-gray-700"
                                                target="_blank" download>
                                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>

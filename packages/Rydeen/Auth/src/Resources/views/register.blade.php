@@ -33,7 +33,7 @@
                         value="{{ old('first_name') }}"
                         required
                         autofocus
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                     >
                 </div>
 
@@ -47,7 +47,7 @@
                         name="last_name"
                         value="{{ old('last_name') }}"
                         required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                     >
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     name="business_name"
                     value="{{ old('business_name') }}"
                     required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                 >
             </div>
 
@@ -76,7 +76,7 @@
                     name="email"
                     value="{{ old('email') }}"
                     required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                     placeholder="you@dealership.com"
                 >
             </div>
@@ -90,7 +90,7 @@
                     id="phone"
                     name="phone"
                     value="{{ old('phone') }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                 >
             </div>
 
@@ -107,7 +107,7 @@
         </p>
 
         <p class="mt-4 text-center text-sm text-gray-600">
-            Already a dealer? <a href="{{ route('dealer.login') }}" class="text-blue-600 hover:text-blue-800 font-medium">Sign in</a>
+            Already a dealer? <a href="{{ route('dealer.login') }}" class="text-gray-900 hover:text-gray-700 font-medium">Sign in</a>
         </p>
     </div>
 </div>

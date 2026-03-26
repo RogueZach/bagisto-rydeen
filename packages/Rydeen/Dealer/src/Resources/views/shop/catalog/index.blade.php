@@ -109,7 +109,7 @@
                                 <span class="px-2 py-0.5 bg-emerald-500 text-white text-[10px] font-bold uppercase rounded shadow">NEW</span>
                             @endif
                             @if ($product->rydeen_flag_updated)
-                                <span class="px-2 py-0.5 bg-blue-500 text-white text-[10px] font-bold uppercase rounded shadow">UPDATED</span>
+                                <span class="px-2 py-0.5 bg-yellow-500 text-white text-[10px] font-bold uppercase rounded shadow">UPDATED</span>
                             @endif
                             @if ($product->rydeen_flag_sale)
                                 <span class="px-2 py-0.5 bg-orange-500 text-white text-[10px] font-bold uppercase rounded shadow">SALE</span>
@@ -123,7 +123,7 @@
                     {{-- Product Info --}}
                     <div class="p-4 flex flex-col flex-1">
                         <a href="{{ route('dealer.catalog.product', $product->url_key ?? $product->id) }}"
-                           class="block text-sm font-semibold text-gray-800 hover:text-blue-600 truncate">
+                           class="block text-sm font-semibold text-gray-800 hover:text-gray-900 truncate">
                             {{ $product->name }}
                         </a>
                         <p class="text-xs text-gray-500 mt-1">SKU: {{ $product->sku }}</p>
@@ -192,7 +192,7 @@
 
                         {{-- Details Link --}}
                         <a href="{{ route('dealer.catalog.product', $product->url_key ?? $product->id) }}"
-                           class="mt-2 block text-center text-xs text-blue-600 hover:text-blue-800 font-medium">
+                           class="mt-2 block text-center text-xs text-gray-900 hover:text-gray-700 font-medium">
                             Details &rarr;
                         </a>
                     </div>

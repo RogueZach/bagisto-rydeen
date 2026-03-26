@@ -141,13 +141,13 @@
                         Orders require admin review before processing.
                     </p>
 
-                    <div class="mt-4 bg-blue-50 border border-blue-200 rounded p-3">
-                        <p class="text-xs text-blue-700">
+                    <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded p-3">
+                        <p class="text-xs text-yellow-700">
                             <strong>Order Processing Hours:</strong> Mon-Fri, 9:30 AM - 4:30 PM PT. Orders received after hours or on weekends will be processed the next business day.
                         </p>
                     </div>
 
-                    <a href="{{ route('dealer.catalog') }}" class="block text-center text-sm text-blue-600 hover:text-blue-800 mt-4">
+                    <a href="{{ route('dealer.catalog') }}" class="block text-center text-sm text-gray-900 hover:text-gray-700 mt-4">
                         Continue Shopping
                     </a>
                 </div>
@@ -160,7 +160,7 @@
             </svg>
             <p class="text-gray-500 mb-4">Your cart is empty</p>
             <a href="{{ route('dealer.catalog') }}"
-               class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 text-sm">
+               class="inline-block bg-gray-900 text-white px-6 py-2 rounded hover:bg-black text-sm">
                 Browse Catalog
             </a>
         </div>

@@ -45,7 +45,7 @@
                     pattern="[0-9]{6}"
                     inputmode="numeric"
                     autocomplete="one-time-code"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition text-center text-2xl tracking-widest font-mono"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition text-center text-2xl tracking-widest font-mono"
                     placeholder="000000"
                 >
                 <p class="mt-2 text-xs text-gray-500 text-center">
@@ -55,7 +55,7 @@
 
             <button
                 type="submit"
-                class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition font-medium"
+                class="w-full bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition font-medium"
             >
                 {{ trans('rydeen-auth::app.verify-code') }}
             </button>
@@ -65,7 +65,7 @@
             @csrf
             <button
                 type="submit"
-                class="text-sm text-blue-600 hover:text-blue-800 underline transition"
+                class="text-sm text-gray-900 hover:text-gray-700 underline transition"
             >
                 {{ trans('rydeen-auth::app.resend-code') }}
             </button>

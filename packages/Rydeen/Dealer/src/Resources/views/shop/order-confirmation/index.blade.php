@@ -31,7 +31,7 @@
 
             <div class="flex gap-4 justify-center">
                 <a href="{{ route('dealer.orders.view', $order->id) }}"
-                   class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 text-sm">
+                   class="bg-gray-900 text-white px-6 py-2 rounded hover:bg-black text-sm">
                     @lang('rydeen-dealer::app.shop.orders.view-order')
                 </a>
                 <a href="{{ route('dealer.catalog') }}"

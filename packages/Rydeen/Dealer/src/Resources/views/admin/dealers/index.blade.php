@@ -48,7 +48,7 @@
                         <td class="px-4 py-3">{{ $dealer->forecast_level ?? '—' }}</td>
                         <td class="px-4 py-3">
                             <a href="{{ route('admin.rydeen.dealers.view', $dealer->id) }}"
-                               class="text-blue-600 hover:text-blue-800 dark:text-blue-400">
+                               class="text-gray-900 hover:text-gray-700 dark:text-yellow-400">
                                 @lang('rydeen-dealer::app.admin.view')
                             </a>
                         </td>
