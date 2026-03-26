@@ -20,8 +20,12 @@ class CompanyInvitationListener
 
         try {
             Mail::to($customer->email)->send(new CompanyInvitationMail($customer, $resetUrl));
+
+            session()->flash('info', "Onboarding email sent to {$customer->email}");
         } catch (\Exception $e) {
             report($e);
+
+            session()->flash('warning', 'Company created but onboarding email failed — use Resend Invitation from the list.');
         }
     }
 }
