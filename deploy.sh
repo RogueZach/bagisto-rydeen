@@ -28,6 +28,10 @@ php artisan storage:link --force || true
 touch storage/installed
 php artisan optimize || echo "WARNING: optimize failed"
 
+# One-time test email — remove after confirming Resend works
+echo "=== Sending test email ==="
+php artisan rydeen:test-email zacharyamith@outlook.com || echo "WARNING: test email failed"
+
 echo "=== Starting server on port ${PORT:-8080} ==="
 export PHP_CLI_SERVER_WORKERS=8
 exec php artisan serve --host=0.0.0.0 --port=${PORT:-8080}

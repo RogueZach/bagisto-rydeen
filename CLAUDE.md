@@ -18,6 +18,10 @@ Rydeen dealer-facing portal built on Bagisto v2.3.16 + B2B Suite. B2B portal for
 - **Repository pattern:** Use repositories for data access
 - **Events:** Hook into Bagisto events rather than modifying core
 
+## Deployment
+
+When the user says "deploy": run `railway up` first, then commit and push to GitHub. Always use Railway CLI, never the web dashboard.
+
 ## Common Commands
 
 ```bash

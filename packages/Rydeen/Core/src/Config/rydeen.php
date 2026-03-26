@@ -5,5 +5,5 @@ return [
     'code_expiry_minutes'  => 10,
     'code_resend_cooldown' => 60,
     'code_max_per_hour'    => 5,
-    'admin_order_email'    => env('ADMIN_MAIL_ADDRESS', 'orders@rydeenmobile.com'),
+    'admin_order_email'    => env('ADMIN_MAIL_ADDRESS', 'orders@test.reform9.com'),
 ];
