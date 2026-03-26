@@ -16,6 +16,8 @@ class OrderListener
 {
     public function afterOrderCreated($order): void
     {
+        $this->addImpersonationAuditNote($order);
+
         $contact = $this->getContact($order);
         $dealer = Customer::find($order->customer_id);
 
@@ -100,6 +102,34 @@ class OrderListener
             );
         } catch (\Exception $e) {
             report($e);
+        }
+    }
+
+    protected function addImpersonationAuditNote($order): void
+    {
+        $adminId = session('impersonating_admin_id');
+
+        if (! $adminId) {
+            return;
+        }
+
+        $admin = Admin::find($adminId);
+        $dealer = auth('customer')->user();
+
+        $auditNote = sprintf(
+            'Order placed by %s on behalf of %s %s',
+            $admin?->name ?? 'Admin #' . $adminId,
+            $dealer?->first_name ?? '',
+            $dealer?->last_name ?? ''
+        );
+
+        $existingNotes = $order->notes;
+        $order->notes = $existingNotes
+            ? $existingNotes . "\n\n" . $auditNote
+            : $auditNote;
+
+        if (method_exists($order, 'save')) {
+            $order->save();
         }
     }
 
