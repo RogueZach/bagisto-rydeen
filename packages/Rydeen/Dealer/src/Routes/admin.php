@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Rydeen\Dealer\Http\Controllers\Admin\DealerApprovalController;
+use Rydeen\Dealer\Http\Controllers\Admin\DealerContactController;
 use Rydeen\Dealer\Http\Controllers\Admin\ImpersonationController;
 use Rydeen\Dealer\Http\Controllers\Admin\OrderApprovalController;
 
@@ -22,4 +23,10 @@ Route::middleware(['web', 'admin'])->prefix('admin/rydeen/orders')->group(functi
     Route::post('{id}/approve', [OrderApprovalController::class, 'approve'])->name('admin.rydeen.orders.approve');
     Route::post('{id}/hold', [OrderApprovalController::class, 'hold'])->name('admin.rydeen.orders.hold');
     Route::post('{id}/cancel', [OrderApprovalController::class, 'cancel'])->name('admin.rydeen.orders.cancel');
+});
+
+Route::middleware(['web', 'admin'])->prefix('admin/rydeen/contacts')->group(function () {
+    Route::get('/', [DealerContactController::class, 'index'])->name('admin.rydeen.contacts.index');
+    Route::get('{id}', [DealerContactController::class, 'view'])->name('admin.rydeen.contacts.view');
+    Route::put('{id}', [DealerContactController::class, 'update'])->name('admin.rydeen.contacts.update');
 });
