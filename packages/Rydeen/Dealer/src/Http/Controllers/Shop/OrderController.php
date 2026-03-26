@@ -8,6 +8,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
+use Rydeen\Dealer\Models\DealerContact;
 
 class OrderController extends Controller
 {
@@ -134,6 +135,10 @@ class OrderController extends Controller
      */
     public function placeOrder(Request $request)
     {
+        $request->validate([
+            'dealer_contact_id' => 'required|integer',
+        ]);
+
         $cart = Cart::getCart();
 
         if (! $cart || $cart->items->isEmpty()) {
@@ -142,6 +147,17 @@ class OrderController extends Controller
         }
 
         $customer = auth('customer')->user();
+
+        // Verify the contact belongs to this dealer
+        $contact = DealerContact::where('id', $request->dealer_contact_id)
+            ->where('customer_id', $customer->id)
+            ->where('is_active', true)
+            ->first();
+
+        if (! $contact) {
+            return redirect()->route('dealer.order-review')
+                ->with('error', 'Please select a valid customer contact.');
+        }
 
         // Ensure billing address exists on the cart
         if (! $cart->billing_address) {
@@ -169,6 +185,11 @@ class OrderController extends Controller
         }
 
         $order = $this->orderRepository->create($data);
+
+        // Attach the dealer contact to the order
+        \Illuminate\Support\Facades\DB::table('orders')
+            ->where('id', $order->id)
+            ->update(['dealer_contact_id' => $contact->id]);
 
         // Deactivate the cart
         Cart::deActivateCart();
