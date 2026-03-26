@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->boolean('rydeen_flag_new')->default(false)->after('status');
+            $table->boolean('rydeen_flag_new')->default(false)->after('attribute_family_id');
             $table->boolean('rydeen_flag_updated')->default(false)->after('rydeen_flag_new');
             $table->boolean('rydeen_flag_sale')->default(false)->after('rydeen_flag_updated');
             $table->boolean('rydeen_flag_reduced')->default(false)->after('rydeen_flag_sale');
