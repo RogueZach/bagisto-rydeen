@@ -36,22 +36,9 @@ php artisan optimize || echo "WARNING: optimize failed"
 echo "=== Sending test email ==="
 php artisan rydeen:test-email zacharyamith@outlook.com || echo "WARNING: test email failed"
 
-echo "=== Starting Octane (FrankenPHP) on port ${PORT:-8080} ==="
-php artisan octane:install --server=frankenphp 2>&1 || { echo "ERROR: FrankenPHP install failed"; exit 1; }
 # Ensure errors are logged to stderr
 export LOG_CHANNEL=stderr
 export LOG_LEVEL=debug
 
-# Remove broken Nix opcache extension that crashes FrankenPHP's embedded PHP
-OPCACHE_SO="/nix/store/zj253anmmfqr6l5cp1l53qflkxr4cvv5-php-opcache-8.2.27/lib/php/extensions/opcache.so"
-if [ -f "$OPCACHE_SO" ]; then
-    # Find and disable the ini file that loads it
-    for ini_dir in $(php -r "echo php_ini_scanned_dir();" 2>/dev/null) /etc/php.d /etc/php/conf.d; do
-        if [ -d "$ini_dir" ]; then
-            find "$ini_dir" -name '*opcache*' -exec sh -c 'echo "; DISABLED — incompatible with FrankenPHP" > "$1"' _ {} \; 2>/dev/null || true
-        fi
-    done
-    echo "Disabled broken opcache extension"
-fi
-
-exec php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=${PORT:-8080} --workers=4 --max-requests=500
+echo "=== Starting server on port ${PORT:-8080} ==="
+exec php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
