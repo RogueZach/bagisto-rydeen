@@ -10,13 +10,13 @@
 
             {{-- Contact Info --}}
             <div class="text-sm space-y-1">
-                <p>Contact: <a href="mailto:orders@rydeenmobile.com" class="text-gray-200 hover:text-white">orders@rydeenmobile.com</a></p>
+                <p>Contact: <a href="mailto:{{ config('rydeen.admin_order_email') }}" class="text-gray-200 hover:text-white">{{ config('rydeen.admin_order_email') }}</a></p>
                 <p>Business Hours: Mon&ndash;Fri 9:30 AM &ndash; 4:30 PM PT</p>
             </div>
         </div>
 
         <div class="border-t border-gray-700 mt-6 pt-4 text-center text-xs text-gray-500">
-            &copy; {{ date('Y') }} Rydeen Mobile Electronics. All rights reserved.
+            &copy; {{ date('Y') }} Rydeen. All rights reserved.
         </div>
     </div>
 </footer>

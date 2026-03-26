@@ -21,7 +21,7 @@
         <a href="{{ route('dealer.orders.view', $order->id) }}" style="margin-left: 10px;">Back to Order</a>
     </div>
 
-    <h1>Rydeen Mobile — Dealer Order</h1>
+    <h1>Rydeen — Dealer Order</h1>
     <p class="meta">
         Order #{{ $order->increment_id ?? $order->id }} |
         {{ $order->created_at->format('M d, Y H:i') }} |

@@ -15,7 +15,7 @@ class OrderListener
     {
         // Send notification to admin
         try {
-            $adminEmail = config('rydeen.admin_order_email', 'orders@rydeenmobile.com');
+            $adminEmail = config('rydeen.admin_order_email', 'orders@test.reform9.com');
             Mail::to($adminEmail)->send(new OrderSubmittedMail($order));
         } catch (\Exception $e) {
             report($e);
