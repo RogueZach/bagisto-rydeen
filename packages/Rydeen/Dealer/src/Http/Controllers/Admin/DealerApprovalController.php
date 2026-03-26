@@ -5,8 +5,10 @@ namespace Rydeen\Dealer\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Webkul\Customer\Models\Customer;
 use Webkul\User\Models\Admin;
+use Rydeen\Dealer\Mail\CompanyInvitationMail;
 use Rydeen\Dealer\Mail\DealerApprovedMail;
 
 class DealerApprovalController extends Controller
@@ -98,5 +100,30 @@ class DealerApprovalController extends Controller
         $dealer->save();
 
         return redirect()->back()->with('success', trans('rydeen-dealer::app.admin.forecast-updated'));
+    }
+
+    /**
+     * Resend invitation email with a password-set link.
+     */
+    public function resendInvitation(int $id)
+    {
+        $customer = Customer::findOrFail($id);
+
+        if ($customer->type !== 'company') {
+            return redirect()->back()->with('error', trans('rydeen-dealer::app.admin.invitation-not-company'));
+        }
+
+        $token = Password::broker('customers')->createToken($customer);
+        $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($customer->email));
+
+        try {
+            Mail::to($customer->email)->send(new CompanyInvitationMail($customer, $resetUrl));
+        } catch (\Exception $e) {
+            report($e);
+
+            return redirect()->back()->with('error', trans('rydeen-dealer::app.admin.invitation-send-failed'));
+        }
+
+        return redirect()->back()->with('success', trans('rydeen-dealer::app.admin.invitation-sent'));
     }
 }

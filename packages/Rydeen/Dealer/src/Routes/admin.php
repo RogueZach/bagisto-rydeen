@@ -11,6 +11,7 @@ Route::middleware(['web', 'admin'])->prefix('admin/rydeen/dealers')->group(funct
     Route::post('{id}/reject', [DealerApprovalController::class, 'reject'])->name('admin.rydeen.dealers.reject');
     Route::post('{id}/assign-rep', [DealerApprovalController::class, 'assignRep'])->name('admin.rydeen.dealers.assign-rep');
     Route::post('{id}/update-forecast', [DealerApprovalController::class, 'updateForecastLevel'])->name('admin.rydeen.dealers.update-forecast');
+    Route::post('{id}/resend-invitation', [DealerApprovalController::class, 'resendInvitation'])->name('admin.rydeen.dealers.resend-invitation');
 });
 
 Route::middleware(['web', 'admin'])->prefix('admin/rydeen/orders')->group(function () {

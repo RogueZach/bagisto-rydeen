@@ -76,48 +76,53 @@ it('admin can update forecast level', function () {
     DB::table('customers')->where('id', $customerId)->delete();
 });
 
-/**
- * Get or create an admin user for testing.
- */
-function getTestAdmin(): Admin
-{
-    $admin = Admin::where('email', 'rydeen-test-admin@example.com')->first();
+if (! function_exists('getTestAdmin')) {
+    /**
+     * Get or create an admin user for testing.
+     */
+    function getTestAdmin(): Admin
+    {
+        $admin = Admin::where('email', 'rydeen-test-admin@example.com')->first();
 
-    if (! $admin) {
-        $roleId = DB::table('roles')->value('id') ?? 1;
-        $id = DB::table('admins')->insertGetId([
-            'name'       => 'Test Admin',
-            'email'      => 'rydeen-test-admin@example.com',
-            'password'   => bcrypt('password'),
-            'status'     => 1,
-            'role_id'    => $roleId,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        $admin = Admin::find($id);
+        if (! $admin) {
+            $roleId = DB::table('roles')->value('id') ?? 1;
+            $id = DB::table('admins')->insertGetId([
+                'name'       => 'Test Admin',
+                'email'      => 'rydeen-test-admin@example.com',
+                'password'   => bcrypt('password'),
+                'status'     => 1,
+                'role_id'    => $roleId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $admin = Admin::find($id);
+        }
+
+        return $admin;
     }
-
-    return $admin;
 }
 
-/**
- * Create a pending (unverified) dealer customer.
- */
-function createPendingDealer(): int
-{
-    $channelId = DB::table('channels')->value('id') ?? 1;
-    $groupId = DB::table('customer_groups')->value('id') ?? 1;
+if (! function_exists('createPendingDealer')) {
+    /**
+     * Create a pending (unverified) dealer customer.
+     */
+    function createPendingDealer(): int
+    {
+        $channelId = DB::table('channels')->value('id') ?? 1;
+        $groupId = DB::table('customer_groups')->value('id') ?? 1;
 
-    return DB::table('customers')->insertGetId([
-        'first_name'        => 'Pending',
-        'last_name'         => 'Dealer',
-        'email'             => 'pending-' . uniqid() . '@example.com',
-        'password'          => bcrypt('password'),
-        'customer_group_id' => $groupId,
-        'channel_id'        => $channelId,
-        'is_verified'       => 0,
-        'status'            => 0,
-        'created_at'        => now(),
-        'updated_at'        => now(),
-    ]);
+        return DB::table('customers')->insertGetId([
+            'first_name'        => 'Pending',
+            'last_name'         => 'Dealer',
+            'email'             => 'pending-' . uniqid() . '@example.com',
+            'password'          => bcrypt('password'),
+            'type'              => 'user',
+            'customer_group_id' => $groupId,
+            'channel_id'        => $channelId,
+            'is_verified'       => 0,
+            'status'            => 0,
+            'created_at'        => now(),
+            'updated_at'        => now(),
+        ]);
+    }
 }

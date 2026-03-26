@@ -34,7 +34,12 @@ return [
         'dealer-approved'  => 'Dealer has been approved.',
         'dealer-rejected'  => 'Dealer has been suspended.',
         'rep-assigned'     => 'Sales rep has been assigned.',
-        'forecast-updated' => 'Forecast level has been updated.',
+        'forecast-updated'       => 'Forecast level has been updated.',
+
+        'invitation-sent'        => 'Invitation email has been sent.',
+        'invitation-send-failed' => 'Failed to send invitation email. Please try again.',
+        'invitation-not-company' => 'Invitations can only be sent to company accounts.',
+        'resend-invitation'      => 'Resend Invitation',
 
         'orders' => [
             'title'          => 'Dealer Orders',
