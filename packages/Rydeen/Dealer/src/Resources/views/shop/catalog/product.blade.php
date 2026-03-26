@@ -34,10 +34,17 @@
 
                 {{-- Price --}}
                 @if ($price)
-                    <div class="mt-4">
-                        <p class="text-3xl font-bold text-green-700">
-                            ${{ number_format($price['price'], 2) }}
-                        </p>
+                    <div class="mt-4 space-y-1">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-sm text-gray-500 uppercase font-medium">Your Price</span>
+                            <span class="text-3xl font-bold text-green-700">${{ number_format($price['price'], 2) }}</span>
+                        </div>
+                        @if (isset($price['msrp']) && $price['msrp'] > $price['price'])
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-sm text-gray-400 uppercase">MSRP</span>
+                                <span class="text-lg text-gray-400 line-through">${{ number_format($price['msrp'], 2) }}</span>
+                            </div>
+                        @endif
                         @if ($price['promo_name'])
                             <span class="inline-block mt-2 px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded font-medium">
                                 {{ $price['promo_name'] }}

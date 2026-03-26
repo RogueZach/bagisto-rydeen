@@ -53,13 +53,15 @@ class CatalogController extends Controller
                 $groupPrice = $this->getGroupPrice($product, $customer->customer_group_id);
                 if ($groupPrice !== null) {
                     $categoryIds = $product->categories->pluck('id')->toArray();
-                    $prices[$product->id] = $this->priceResolver->resolve(
+                    $resolved = $this->priceResolver->resolve(
                         $product->id,
                         (float) $groupPrice,
                         $customer->customer_group_id,
                         1,
                         $categoryIds
                     );
+                    $resolved['msrp'] = (float) $product->price;
+                    $prices[$product->id] = $resolved;
                 }
             }
         }
@@ -92,6 +94,7 @@ class CatalogController extends Controller
                     1,
                     $categoryIds
                 );
+                $price['msrp'] = (float) $product->price;
             }
         }
 
