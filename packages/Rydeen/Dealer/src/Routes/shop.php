@@ -27,6 +27,11 @@ Route::middleware(['web', 'customer'])->prefix('dealer')->group(function () {
     Route::get('order-review', [OrderController::class, 'review'])->name('dealer.order-review');
     Route::post('order-review/place', [OrderController::class, 'placeOrder'])->name('dealer.order-review.place');
 
+    // Cart (redirect to order review)
+    Route::get('cart', function () {
+        return redirect()->route('dealer.order-review');
+    })->name('dealer.cart');
+
     // Order Confirmation
     Route::get('order-confirmation/{id}', [OrderController::class, 'confirmation'])->name('dealer.order-confirmation');
 
