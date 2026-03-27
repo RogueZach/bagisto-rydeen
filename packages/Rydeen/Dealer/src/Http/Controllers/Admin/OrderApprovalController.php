@@ -5,9 +5,12 @@ namespace Rydeen\Dealer\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Rydeen\Dealer\Http\Traits\ScopesForRep;
 
 class OrderApprovalController extends Controller
 {
+    use ScopesForRep;
+
     /**
      * List all orders with optional status and search filters.
      */
@@ -27,6 +30,10 @@ class OrderApprovalController extends Controller
                 'customers.email'
             )
             ->orderByDesc('orders.created_at');
+
+        if ($repId = $this->repId()) {
+            $query->where('customers.assigned_rep_id', $repId);
+        }
 
         if ($status = $request->get('status')) {
             $query->where('orders.status', $status);
@@ -68,6 +75,7 @@ class OrderApprovalController extends Controller
                 'customers.last_name',
                 'customers.email',
                 'customers.phone',
+                'customers.assigned_rep_id',
                 'orders.dealer_contact_id'
             )
             ->where('orders.id', $id)
@@ -77,9 +85,13 @@ class OrderApprovalController extends Controller
             abort(404);
         }
 
+        if ($repId = $this->repId()) {
+            abort_unless((int) $order->assigned_rep_id === $repId, 403);
+        }
+
         $items = DB::table('order_items')
             ->where('order_id', $id)
-            ->select('id', 'name', 'sku', 'qty_ordered', 'price', 'total', 'type')
+            ->select('id', 'name', 'sku', 'qty_ordered', 'price', 'total', 'type', 'product_id')
             ->get();
 
         $contact = null;
@@ -92,14 +104,33 @@ class OrderApprovalController extends Controller
 
     /**
      * Approve an order — set status to processing.
+     * Checks stock levels first; warns if insufficient unless override is confirmed.
      */
-    public function approve(int $id)
+    public function approve(Request $request, int $id)
     {
-        DB::table('orders')->where('id', $id)->update([
-            'status'     => 'processing',
-            'updated_at' => now(),
-        ]);
+        if (! $request->has('confirm_override')) {
+            $items = DB::table('order_items')
+                ->where('order_id', $id)
+                ->select('name', 'sku', 'qty_ordered', 'product_id')
+                ->get();
 
+            $warnings = [];
+            foreach ($items as $item) {
+                $totalQty = (int) DB::table('product_inventories')
+                    ->where('product_id', $item->product_id)
+                    ->sum('qty');
+                if ($totalQty < (int) $item->qty_ordered) {
+                    $warnings[] = "{$item->name} (SKU: {$item->sku}): {$totalQty} available, {$item->qty_ordered} ordered";
+                }
+            }
+            if (! empty($warnings)) {
+                return redirect()->back()->with('stock_warnings', $warnings);
+            }
+        }
+
+        DB::table('orders')->where('id', $id)->update([
+            'status' => 'processing', 'updated_at' => now(),
+        ]);
         return redirect()->back()->with('success', 'Order has been approved and set to processing.');
     }
 

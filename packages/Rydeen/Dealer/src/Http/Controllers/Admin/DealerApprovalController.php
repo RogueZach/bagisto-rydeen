@@ -9,15 +9,24 @@ use Webkul\Customer\Models\Customer;
 use Webkul\User\Models\Admin;
 use Rydeen\Dealer\Mail\CompanyInvitationMail;
 use Rydeen\Dealer\Mail\DealerApprovedMail;
+use Rydeen\Dealer\Http\Traits\ScopesForRep;
 
 class DealerApprovalController extends Controller
 {
+    use ScopesForRep;
+
     /**
      * List all dealers (pending and active).
      */
     public function index()
     {
-        $dealers = Customer::orderByDesc('created_at')->paginate(25);
+        $query = Customer::orderByDesc('created_at');
+
+        if ($repId = $this->repId()) {
+            $query->where('assigned_rep_id', $repId);
+        }
+
+        $dealers = $query->paginate(25);
 
         return view('rydeen-dealer::admin.dealers.index', compact('dealers'));
     }
@@ -28,6 +37,11 @@ class DealerApprovalController extends Controller
     public function view(int $id)
     {
         $dealer = Customer::findOrFail($id);
+
+        if ($repId = $this->repId()) {
+            abort_unless($dealer->assigned_rep_id === $repId, 403);
+        }
+
         $admins = Admin::orderBy('name')->get();
 
         return view('rydeen-dealer::admin.dealers.view', compact('dealer', 'admins'));
@@ -125,5 +139,18 @@ class DealerApprovalController extends Controller
         }
 
         return redirect()->back()->with('success', trans('rydeen-dealer::app.admin.invitation-sent'));
+    }
+
+    /**
+     * Approve a dealer address.
+     */
+    public function approveAddress(int $dealerId, int $addressId)
+    {
+        $dealer = Customer::findOrFail($dealerId);
+        \Illuminate\Support\Facades\DB::table('rydeen_dealer_addresses')
+            ->where('id', $addressId)
+            ->where('customer_id', $dealer->id)
+            ->update(['is_approved' => true, 'updated_at' => now()]);
+        return redirect()->back()->with('success', trans('rydeen-dealer::app.admin.address-approved'));
     }
 }
