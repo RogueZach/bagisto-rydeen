@@ -17,6 +17,7 @@ class RydeenSeeder extends Seeder
         $this->seedCustomerGroups();
         $this->seedB2BConfig();
         $this->seedAdminBranding();
+        $this->seedSalesRepRole();
     }
 
     protected function seedCustomerGroups(): void
@@ -61,6 +62,27 @@ class RydeenSeeder extends Seeder
         CoreConfig::updateOrCreate(
             ['code' => 'general.design.admin_logo.logo_image'],
             ['value' => 'rydeen/logo.png', 'channel_code' => null, 'locale_code' => null]
+        );
+    }
+
+    protected function seedSalesRepRole(): void
+    {
+        \Webkul\User\Models\Role::firstOrCreate(
+            ['name' => 'Sales Rep'],
+            [
+                'description'     => 'Sales representative with access to assigned dealers and their orders only.',
+                'permission_type' => 'custom',
+                'permissions'     => [
+                    'dashboard',
+                    'rydeen',
+                    'rydeen.dealers',
+                    'rydeen.dealers.view',
+                    'rydeen.orders',
+                    'rydeen.orders.view',
+                    'rydeen.orders.approve',
+                    'rydeen.orders.hold',
+                ],
+            ]
         );
     }
 }
