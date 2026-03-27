@@ -215,6 +215,18 @@
     window.rydeenCart = {};
 
     /**
+     * Extract the cart object from a Bagisto JsonResource response.
+     * Bagisto wraps in: { data: { data: { ...cart... }, message: "..." } }
+     */
+    function extractCart(json) {
+        const wrapper = json.data;
+        if (!wrapper) return null;
+        // Inner 'data' holds the actual cart object
+        const cart = wrapper.data ?? wrapper;
+        return (cart && cart.items) ? cart : null;
+    }
+
+    /**
      * Fetch current cart and populate rydeenCart map.
      */
     async function loadCart() {
@@ -223,19 +235,9 @@
                 headers: { 'Accept': 'application/json' },
             });
             const json = await res.json();
-            const cart = json.data;
-            if (cart && cart.items) {
-                window.rydeenCart = {};
-                let totalQty = 0;
-                cart.items.forEach(item => {
-                    // Match cart items to products by product_url_key
-                    window.rydeenCart[item.product_url_key] = {
-                        cartItemId: item.id,
-                        qty: item.quantity,
-                    };
-                    totalQty += item.quantity;
-                });
-                updateCartBadge(totalQty);
+            const cart = extractCart(json);
+            if (cart) {
+                syncCartState(cart);
             }
         } catch (e) {
             console.error('Failed to load cart', e);
@@ -256,9 +258,14 @@
             },
             body: JSON.stringify({ product_id: productId, quantity: quantity }),
         });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message || 'Failed to add to cart');
+        }
         const json = await res.json();
-        if (json.data) {
-            syncCartState(json.data);
+        const cart = extractCart(json);
+        if (cart) {
+            syncCartState(cart);
         }
         return json;
     }
@@ -276,9 +283,14 @@
             },
             body: JSON.stringify({ qty: { [cartItemId]: newQty } }),
         });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message || 'Failed to update cart');
+        }
         const json = await res.json();
-        if (json.data) {
-            syncCartState(json.data);
+        const cart = extractCart(json);
+        if (cart) {
+            syncCartState(cart);
         }
         return json;
     }
@@ -296,28 +308,31 @@
             },
             body: JSON.stringify({ cart_item_id: cartItemId }),
         });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message || 'Failed to remove item');
+        }
         const json = await res.json();
-        if (json.data) {
-            syncCartState(json.data);
+        const cart = extractCart(json);
+        if (cart) {
+            syncCartState(cart);
         }
         return json;
     }
 
     /**
-     * Sync local rydeenCart state from the API cart response.
+     * Sync local rydeenCart state from the cart object.
      */
     function syncCartState(cart) {
         window.rydeenCart = {};
         let totalQty = 0;
-        if (cart.items) {
-            cart.items.forEach(item => {
-                window.rydeenCart[item.product_url_key] = {
-                    cartItemId: item.id,
-                    qty: item.quantity,
-                };
-                totalQty += item.quantity;
-            });
-        }
+        cart.items.forEach(item => {
+            window.rydeenCart[item.product_url_key] = {
+                cartItemId: item.id,
+                qty: item.quantity,
+            };
+            totalQty += item.quantity;
+        });
         updateCartBadge(totalQty);
     }
 

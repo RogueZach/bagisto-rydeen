@@ -135,19 +135,21 @@
             },
             body: JSON.stringify({ product_id: productId, quantity: parseInt(quantity) }),
         })
-        .then(r => r.json())
-        .then(data => {
+        .then(function(r) {
+            if (!r.ok) throw new Error('Add to cart failed');
+            return r.json();
+        })
+        .then(function(json) {
             btn.textContent = '{{ trans('rydeen-dealer::app.shop.catalog.added') }}';
 
-            // Update cart badge
+            // Unwrap Bagisto JsonResource: { data: { data: {...cart...} } }
+            var cart = json.data && json.data.data ? json.data.data : json.data;
             var badge = document.getElementById('cart-badge');
-            if (badge && data.data) {
+            if (badge && cart && cart.items) {
                 var itemCount = 0;
-                if (data.data.items) {
-                    data.data.items.forEach(function(item) {
-                        itemCount += item.quantity;
-                    });
-                }
+                cart.items.forEach(function(item) {
+                    itemCount += item.quantity;
+                });
                 if (itemCount > 0) {
                     badge.textContent = itemCount;
                     badge.style.display = 'flex';
