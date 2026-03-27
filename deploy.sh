@@ -40,5 +40,9 @@ php artisan rydeen:test-email zacharyamith@outlook.com || echo "WARNING: test em
 export LOG_CHANNEL=stderr
 export LOG_LEVEL=debug
 
-echo "=== Starting server on port ${PORT:-8080} ==="
-exec php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+echo "=== Starting Nginx + PHP-FPM on port ${PORT:-8080} ==="
+
+# Template the Railway PORT into the Nginx config
+envsubst '${PORT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf
+
+exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
