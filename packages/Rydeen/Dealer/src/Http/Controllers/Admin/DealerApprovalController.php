@@ -39,7 +39,7 @@ class DealerApprovalController extends Controller
         $dealer = Customer::findOrFail($id);
 
         if ($repId = $this->repId()) {
-            abort_unless($dealer->assigned_rep_id === $repId, 403);
+            abort_unless((int) $dealer->assigned_rep_id === $repId, 403);
         }
 
         $admins = Admin::orderBy('name')->get();

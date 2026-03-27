@@ -108,7 +108,7 @@ class OrderApprovalController extends Controller
      */
     public function approve(Request $request, int $id)
     {
-        if (! $request->has('confirm_override')) {
+        if (! $request->boolean('confirm_override')) {
             $items = DB::table('order_items')
                 ->where('order_id', $id)
                 ->select('name', 'sku', 'qty_ordered', 'product_id')
