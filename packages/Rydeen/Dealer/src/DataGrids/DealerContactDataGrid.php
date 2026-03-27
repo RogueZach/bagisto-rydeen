@@ -110,7 +110,7 @@ class DealerContactDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => 'Created',
-            'type'       => 'date_range',
+            'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
