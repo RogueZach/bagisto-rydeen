@@ -41,6 +41,7 @@ return [
         'dealer-approved'  => 'Dealer has been approved.',
         'dealer-rejected'  => 'Dealer has been suspended.',
         'rep-assigned'     => 'Sales rep has been assigned.',
+        'address-approved' => 'Address has been approved.',
         'forecast-updated'       => 'Forecast level has been updated.',
 
         'invitation-sent'        => 'Invitation email has been sent.',
