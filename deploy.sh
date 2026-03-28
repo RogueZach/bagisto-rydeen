@@ -73,14 +73,15 @@ http {
             add_header Content-Type text/plain;
         }
 
-        location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
-            expires 30d;
-            add_header Cache-Control "public, immutable";
-            try_files \$uri =404;
-        }
-
         location / {
             try_files \$uri \$uri/ /index.php?\$query_string;
+        }
+
+        # Cache static assets that exist on disk, fall through to PHP if not found
+        location ~* \.(js|css|woff|woff2|ttf|eot)$ {
+            expires 30d;
+            add_header Cache-Control "public, immutable";
+            try_files \$uri /index.php?\$query_string;
         }
 
         location ~ \.php$ {
