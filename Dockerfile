@@ -10,8 +10,8 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interactio
 FROM node:18-slim AS node
 
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json package-lock.json* ./
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 COPY . .
 RUN npm run build
 
