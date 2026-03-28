@@ -69,8 +69,9 @@ COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/nginx.conf /etc/nginx/templates/default.conf.template
 
-# Remove default nginx site
-RUN rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+# Remove default nginx site and FPM's zz-docker.conf (overrides listen to TCP 9000, we use Unix socket)
+RUN rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default \
+    && rm -f /usr/local/etc/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/docker.conf
 
 # Set working directory
 WORKDIR /var/www/html
