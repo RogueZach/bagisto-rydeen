@@ -32,10 +32,6 @@ php artisan db:seed --class="Rydeen\Core\Database\Seeders\RydeenSeeder" --force 
 
 php artisan optimize || echo "WARNING: optimize failed"
 
-# One-time test email — remove after confirming Resend works
-echo "=== Sending test email ==="
-php artisan rydeen:test-email zacharyamith@outlook.com || echo "WARNING: test email failed"
-
 # Ensure errors are logged to stderr
 export LOG_CHANNEL=stderr
 export LOG_LEVEL=debug
