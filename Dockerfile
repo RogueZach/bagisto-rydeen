@@ -4,7 +4,7 @@ FROM composer:2 AS composer
 WORKDIR /app
 COPY composer.json composer.lock ./
 COPY packages/ packages/
-RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction --ignore-platform-reqs
 
 # ---- Stage 2: Node build (Vite) ----
 FROM node:18-slim AS node
