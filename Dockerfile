@@ -37,15 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pdo_mysql \
         gd \
         intl \
-        curl \
-        mbstring \
         calendar \
-        xml \
-        dom \
-        fileinfo \
-        ctype \
-        filter \
-        tokenizer \
         zip \
         bcmath \
         opcache \
