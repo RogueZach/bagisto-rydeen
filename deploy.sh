@@ -1,6 +1,10 @@
 #!/bin/bash
 echo "=== Railway Deploy ==="
 
+# Ensure www-data can write to storage and cache (volume mounts reset Dockerfile permissions)
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
 # Clear build-phase cache
 rm -f bootstrap/cache/config.php
 rm -f bootstrap/cache/routes-v7.php
