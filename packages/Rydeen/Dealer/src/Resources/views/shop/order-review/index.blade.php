@@ -258,6 +258,12 @@
                         Orders require admin review before processing.
                     </p>
 
+                    <div class="mt-3 bg-blue-50 border border-blue-200 rounded p-3">
+                        <p class="text-xs text-blue-800">
+                            <strong>Payment Processing:</strong> All payment processing is handled exclusively via email correspondence. A Rydeen specialist will contact you by email after your order is reviewed.
+                        </p>
+                    </div>
+
                     <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded p-3">
                         <p class="text-xs text-yellow-700">
                             <strong>Order Processing Hours:</strong> Mon-Fri, 9:30 AM - 4:30 PM PT. Orders received after hours or on weekends will be processed the next business day.
