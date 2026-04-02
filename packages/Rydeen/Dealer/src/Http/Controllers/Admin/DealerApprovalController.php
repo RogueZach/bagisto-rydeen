@@ -158,6 +158,23 @@ class DealerApprovalController extends Controller
     }
 
     /**
+     * Delete a dealer and associated records.
+     */
+    public function destroy(int $id)
+    {
+        $dealer = Customer::findOrFail($id);
+
+        // Remove associated Rydeen records
+        \Rydeen\Dealer\Models\DealerAddress::where('customer_id', $dealer->id)->delete();
+        \Rydeen\Dealer\Models\DealerContact::where('customer_id', $dealer->id)->delete();
+
+        $dealer->delete();
+
+        return redirect()->route('admin.rydeen.dealers.index')
+            ->with('success', trans('rydeen-dealer::app.admin.dealer-deleted'));
+    }
+
+    /**
      * Approve a dealer address.
      */
     public function approveAddress(int $dealerId, int $addressId)

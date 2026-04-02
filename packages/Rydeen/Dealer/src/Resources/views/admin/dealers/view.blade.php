@@ -129,7 +129,7 @@
                     </form>
                 @endif
 
-                @if ($dealer->type === 'company' && $dealer->is_verified && ! $dealer->is_suspended)
+                @if ($dealer->type === 'company' && ! $dealer->is_suspended)
                     <form action="{{ route('admin.rydeen.dealers.resend-invitation', $dealer->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="px-4 py-2 bg-yellow-500 text-black rounded hover:bg-yellow-600 text-sm">
@@ -208,6 +208,26 @@
             </form>
         </div>
     </div>
+
+    {{-- Delete Dealer --}}
+    @unless ($isRep)
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6 border border-red-200 dark:border-red-800">
+        <h3 class="text-md font-semibold text-red-600 dark:text-red-400 mb-2">
+            @lang('rydeen-dealer::app.admin.danger-zone')
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            @lang('rydeen-dealer::app.admin.delete-dealer-warning')
+        </p>
+        <form action="{{ route('admin.rydeen.dealers.destroy', $dealer->id) }}" method="POST"
+              onsubmit="return confirm('@lang('rydeen-dealer::app.admin.delete-dealer-confirm')')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                @lang('rydeen-dealer::app.admin.delete-dealer')
+            </button>
+        </form>
+    </div>
+    @endunless
 
     {{-- Shipping Addresses --}}
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6">

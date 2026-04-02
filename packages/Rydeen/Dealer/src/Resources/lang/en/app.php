@@ -45,6 +45,11 @@ return [
         'rep-assigned'     => 'Sales rep has been assigned.',
         'address-approved' => 'Address has been approved.',
         'forecast-updated'       => 'Forecast level has been updated.',
+        'dealer-deleted'         => 'Dealer has been permanently deleted.',
+        'delete-dealer'          => 'Delete Dealer',
+        'delete-dealer-warning'  => 'Permanently delete this dealer and all associated addresses and contacts. This action cannot be undone.',
+        'delete-dealer-confirm'  => 'Are you sure you want to permanently delete this dealer? This cannot be undone.',
+        'danger-zone'            => 'Danger Zone',
 
         'invitation-sent'        => 'Invitation email has been sent.',
         'invitation-send-failed' => 'Failed to send invitation email. Please try again.',
